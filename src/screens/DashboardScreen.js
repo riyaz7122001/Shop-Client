@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import axios from "axios";
 import logger from "use-reducer-logger";
 import Row from "react-bootstrap/Row";
@@ -21,7 +21,7 @@ const reducer = (state, action) => {
   }
 };
 
-const HomeScreen = () => {
+const DashboardScreen = () => {
   // here useReducer needs two parameter
   const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
     products: [],
@@ -49,7 +49,7 @@ const HomeScreen = () => {
     <div>
       {/* this is used for title  */}
       <Helmet>
-        <title>Shop</title>
+        <title>Amazon</title>
       </Helmet>
       <h1>Featured Products</h1>
       <h2>
@@ -73,4 +73,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default DashboardScreen;

@@ -48,6 +48,18 @@ const data = {
       numReviews: 10,
       description: "high quality product",
     },
+    {
+      name: "Poly Cotton Casual Shirt",
+      slug: "poly-cotton-casual-shirt",
+      category: "Shirts",
+      image: "/images/p5.jpg",
+      price: 197,
+      countInStock: 11,
+      brand: "Poly",
+      rating: 4.5,
+      numReviews: 6,
+      description: "medium quality product",
+    },
   ],
 };
 export default data;
