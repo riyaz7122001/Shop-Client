@@ -180,6 +180,7 @@ const PlaceOrderScreen = () => {
                 <ListGroup.Item>
                   <div className="d-grid">
                     <Button
+                      variant="info"
                       type="button"
                       onClick={placeOrderHandler}
                       disabled={cart.cartItems.length === 0}

@@ -108,7 +108,7 @@ const ShippingAddressScreen = () => {
           </Form.Group>
 
           <div className="mb-3">
-            <Button variant="warning" type="submit">
+            <Button variant="info" type="submit">
               Continue
             </Button>
           </div>
