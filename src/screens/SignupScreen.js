@@ -53,58 +53,54 @@ const SignupScreen = () => {
       navigate(redirect);
     }
   }, [navigate, redirect, userInfo]);
-  //   return (
-  //   <div className="Signup">
-  //     <div className="signInfo">
-  //       <h1 className="signup_header">Signup</h1>
-  //       <input
-  //         type="text"
-  //         name="name"
-  //         placeholder="Enter your name"
-  //         autoCapitalize="false"
-  //         autoComplete="false"
-  //         autoCorrect="false"
-  //         onChange={handleChange}
-  //         value={value.name}
-  //       />
-  //       <input
-  //         type="email"
-  //         name="email"
-  //         placeholder="Enter your email"
-  //         autoCapitalize="false"
-  //         autoComplete="false"
-  //         autoCorrect="false"
-  //         onChange={handleChange}
-  //         value={value.email}
-  //       />
-  //       <input
-  //         type="password"
-  //         name="password"
-  //         placeholder="Enter your password"
-  //         autoCapitalize="false"
-  //         autoComplete="false"
-  //         autoCorrect="false"
-  //         onChange={handleChange}
-  //         value={value.password}
-  //       />
+return (
+    <Container className="small-container">
+      <div className="small-container">
+        <Helmet>
+          <title>Sign Up</title>
+        </Helmet>
+        <h1 className="my-3">Sign Up</h1>
+        <Form onSubmit={submitHandler}>
+          <Form.Group className="mb-3" controlId="name">
+            <Form.Label>Name</Form.Label>
+            <Form.Control onChange={(e) => setName(e.target.value)} required />
+          </Form.Group>
 
-  //       <div className="footer">
-  //         <span className="error">{error}</span>
-  //         <button onClick={handleSignup} disabled={buttonDisabled}>
-  //           Signup
-  //         </button>
-  //         <p>
-  //           Already have any account?{" "}
-  //           <span>
-  //             <NavLink exact to="/login">
-  //               Login
-  //             </NavLink>
-  //           </span>
-  //         </p>
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
+          <Form.Group className="mb-3" controlId="email">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Form.Group className="mb-3" controlId="confirmPassword">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                type="password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Form.Group>
+          <div className="mb-3">
+            <Button variant="info" type="submit">Sign Up</Button>
+          </div>
+          <div className="mb-3">
+            Already have an account?{" "}
+            <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+          </div>
+        </Form>
+      </div>
+    </Container>
+  );  
 };
 
 export default SignupScreen;
