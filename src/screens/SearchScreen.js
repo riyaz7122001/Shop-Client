@@ -1,14 +1,17 @@
-import axios from "axios";
-import React, { useReducer, useState } from "react";
-import { useEffect } from "react";
-import Col from "react-bootstrap/esm/Col";
-import Row from "react-bootstrap/esm/Row";
-import { Helmet } from "react-helmet-async";
+import React, { useEffect, useReducer, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import { toast } from "react-toastify";
+import { getError } from "../utils";
+import { Helmet } from "react-helmet-async";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Rating from "../components/Rating";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { getError } from "../utils";
+import Button from "react-bootstrap/Button";
+import Product from "../components/Product";
+import LinkContainer from "react-router-bootstrap/LinkContainer";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -46,30 +49,57 @@ const prices = [
   },
 ];
 
-const SearchScreen = () => {
+export const ratings = [
+  {
+    name: "4stars & up",
+    rating: 4,
+  },
+
+  {
+    name: "3stars & up",
+    rating: 3,
+  },
+
+  {
+    name: "2stars & up",
+    rating: 2,
+  },
+
+  {
+    name: "1stars & up",
+    rating: 1,
+  },
+];
+
+export default function SearchScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const searchProducts = new URLSearchParams(search);
-  // now for getting the category from database example for /search/?query=Pants...
-  const category = searchProducts.get("category") || "all";
-  const query = searchProducts.get("query") || "all";
-  const price = searchProducts.get("price") || "all";
-  const rating = searchProducts.get("rating") || "all";
-  const order = searchProducts.get("order") || "newest";
-  const page = searchProducts.get("page") || 1;
+  const sp = new URLSearchParams(search); // /search?category=Shirts
+  const category = sp.get("category") || "all";
+  const query = sp.get("query") || "all";
+  const price = sp.get("price") || "all";
+  const rating = sp.get("rating") || "all";
+  const order = sp.get("order") || "newest";
+  const page = sp.get("page") || 1;
 
   const [{ loading, error, products, pages, countProducts }, dispatch] =
-    useReducer(reducer, { loading: true, error: "" });
+    useReducer(reducer, {
+      loading: true,
+      error: "",
+    });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/search?page=${page}$query=${query}$price=${price}&rating=${rating}$order=${order}`
+          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
         );
-        dispatch({ type: "FETCH_SUCCESS,payload:data" });
+        dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: getError(err) });
+        dispatch({
+          type: "FETCH_FAIL",
+          payload: getError(error),
+        });
       }
     };
     fetchData();
@@ -99,7 +129,6 @@ const SearchScreen = () => {
   };
   return (
     <div>
-      {" "}
       <Helmet>
         <title>Search Products</title>
       </Helmet>
@@ -108,7 +137,6 @@ const SearchScreen = () => {
           <h3>Department</h3>
           <div>
             <ul>
-              {" "}
               <li>
                 <Link
                   className={"all" === category ? "text-bold" : ""}
@@ -152,6 +180,29 @@ const SearchScreen = () => {
               ))}
             </ul>
           </div>
+          <div>
+            <h3>Avg. Customer Review</h3>
+            <ul>
+              {ratings.map((r) => (
+                <li key={r.name}>
+                  <Link
+                    to={getFilterUrl({ rating: r.rating })}
+                    className={`${r.rating}` === `${rating}` ? "text-bold" : ""}
+                  >
+                    <Rating caption={" & up"} rating={r.rating}></Rating>
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link
+                  to={getFilterUrl({ rating: "all" })}
+                  className={rating === "all" ? "text-bold" : ""}
+                >
+                  <Rating caption={" & up"} rating={0}></Rating>
+                </Link>
+              </li>
+            </ul>
+          </div>
         </Col>
         <Col md={9}>
           {loading ? (
@@ -160,15 +211,74 @@ const SearchScreen = () => {
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
             <>
-              <Row classNam="justify-content-between mb-3">
-                <Col md={6}></Col>
+              <Row className="justify-content-between mb-3">
+                <Col md={6}>
+                  <div>
+                    {countProducts === 0 ? "No" : countProducts} Results
+                    {query !== "all" && " : " + query}
+                    {category !== "all" && " : " + category}
+                    {price !== "all" && " : Price " + price}
+                    {rating !== "all" && " : Rating " + rating + " & up"}
+                    {query !== "all" ||
+                    category !== "all" ||
+                    rating !== "all" ||
+                    price !== "all" ? (
+                      <Button
+                        variant="light"
+                        onClick={() => navigate("/search")}
+                      >
+                        <i className="fas fa-times-circle"></i>
+                      </Button>
+                    ) : null}
+                  </div>
+                </Col>
+                <Col className="text-end">
+                  Sort by{" "}
+                  <select
+                    value={order}
+                    onChange={(e) => {
+                      navigate(getFilterUrl({ order: e.target.value }));
+                    }}
+                  >
+                    <option value="newest">Newest Arrivals</option>
+                    <option value="lowest">Price: Low to High</option>
+                    <option value="highest">Price: High to Low</option>
+                    <option value="toprated">Avg. Customer Reviews</option>
+                  </select>
+                </Col>
               </Row>
+              {products.length === 0 && (
+                <MessageBox>No Product Found</MessageBox>
+              )}
+
+              <Row>
+                {products.map((product) => (
+                  <Col sm={6} lg={4} className="mb-3" key={product._id}>
+                    <Product product={product}></Product>
+                  </Col>
+                ))}
+              </Row>
+
+              <div>
+                {[...Array(pages).keys()].map((x) => (
+                  <LinkContainer
+                    key={x + 1}
+                    className="mx-1"
+                    to={getFilterUrl({ page: x + 1 })}
+                  >
+                    <Button
+                      className={Number(page) === x + 1 ? "text-bold" : ""}
+                      variant="light"
+                    >
+                      {x + 1}
+                    </Button>
+                  </LinkContainer>
+                ))}
+              </div>
             </>
           )}
         </Col>
       </Row>
     </div>
   );
-};
-
-export default SearchScreen;
+}

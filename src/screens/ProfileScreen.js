@@ -2,7 +2,6 @@ import React, { useContext, useReducer, useState } from "react";
 import { Store } from "../Store";
 import { Helmet } from "react-helmet-async";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
 import axios from "axios";
@@ -29,7 +28,7 @@ const ProfileScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
+  const [dispatch] = useReducer(reducer, {
     loadingUpdate: false,
   });
 
@@ -62,50 +61,70 @@ const ProfileScreen = () => {
   };
 
   return (
-    <div className="container small-container">
-      <Helmet>
-        <title>User Profile</title>
-      </Helmet>
-      <h1 className="my-3">User Profile</h1>
-      <form onSubmit={submitHandler}>
-        {" "}
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </Form.Group>
-        <div className="mb-3">
-          <Button variant="info" type="submit">
-            Update
-          </Button>
-        </div>
-      </form>
+    <div className="login">
+      <div className="login_container">
+        <Helmet>
+          <title>User Profile</title>
+        </Helmet>
+        <h1 className="text-center">User Profile</h1>
+        <form onSubmit={submitHandler}>
+          {" "}
+          <Form.Group className="mb-3" controlId="name">
+            <h5>Name</h5>
+            <input
+              className="login_input"
+              type="text"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="name">
+            <h5>Email</h5>
+            <input
+              className="login_input"
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="password">
+            <h5>Password</h5>
+            <input
+              className="login_input"
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="password">
+            <h5>Confirm Password</h5>
+            <input
+              className="login_input"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <div className="mb-3">
+            <button
+              style={{ textDecoration: "none" }}
+              className="login_register_button"
+              variant="info"
+              type="submit"
+            >
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

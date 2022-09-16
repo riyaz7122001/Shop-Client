@@ -1,9 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { Helmet } from "react-helmet-async";
 import { useContext, useEffect, useState } from "react";
 import { Store } from "../Store";
@@ -53,58 +51,72 @@ const SignupScreen = () => {
       navigate(redirect);
     }
   }, [navigate, redirect, userInfo]);
-  //   return (
-  //   <div className="Signup">
-  //     <div className="signInfo">
-  //       <h1 className="signup_header">Signup</h1>
-  //       <input
-  //         type="text"
-  //         name="name"
-  //         placeholder="Enter your name"
-  //         autoCapitalize="false"
-  //         autoComplete="false"
-  //         autoCorrect="false"
-  //         onChange={handleChange}
-  //         value={value.name}
-  //       />
-  //       <input
-  //         type="email"
-  //         name="email"
-  //         placeholder="Enter your email"
-  //         autoCapitalize="false"
-  //         autoComplete="false"
-  //         autoCorrect="false"
-  //         onChange={handleChange}
-  //         value={value.email}
-  //       />
-  //       <input
-  //         type="password"
-  //         name="password"
-  //         placeholder="Enter your password"
-  //         autoCapitalize="false"
-  //         autoComplete="false"
-  //         autoCorrect="false"
-  //         onChange={handleChange}
-  //         value={value.password}
-  //       />
 
-  //       <div className="footer">
-  //         <span className="error">{error}</span>
-  //         <button onClick={handleSignup} disabled={buttonDisabled}>
-  //           Signup
-  //         </button>
-  //         <p>
-  //           Already have any account?{" "}
-  //           <span>
-  //             <NavLink exact to="/login">
-  //               Login
-  //             </NavLink>
-  //           </span>
-  //         </p>
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
+  return (
+    <div className="login">
+      <div className="login_container">
+        <Helmet>
+          <title>Sign Up</title>
+        </Helmet>
+        <h1 className="text-center">Sign Up</h1>
+        <Form onSubmit={submitHandler}>
+          <Form.Group className="mb-3" controlId="name">
+            <h5>Name</h5>
+            <input
+              className="login_input"
+              type="text"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="email">
+            <h5>Email</h5>
+            <input
+              className="login_input"
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="password">
+            <h5>Password</h5>
+            <input
+              className="login_input"
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="confirmPassword">
+            <h5>Confirm Password</h5>
+            <input
+              className="login_input"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+              }}
+            />
+          </Form.Group>
+
+          <div className="mb-3">
+            <button type="submit" className="login_signIn">
+              Sign Up
+            </button>
+          </div>
+          <div className="login_register_button">
+            Already have an account?{" "}
+            <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+          </div>
+        </Form>
+      </div>
+    </div>
+  );
 };
-
 export default SignupScreen;

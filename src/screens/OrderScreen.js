@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useReducer } from "react";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { Helmet } from "react-helmet-async";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -326,7 +326,19 @@ const OrderScreen = () => {
                   </ListGroup.Item>
                 )}
                 <p className="text-center">OR</p>
-                <Button variant="info bold">Cash On Delivery</Button>
+                <Button variant="info bold">
+                  <NavLink
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                      fontWeight: "bold",
+                    }}
+                    exact
+                    to="/cash"
+                  >
+                    Cash On Delivery
+                  </NavLink>
+                </Button>
                 {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                   <ListGroup.Item>
                     {loadingDeliver && <LoadingBox></LoadingBox>}

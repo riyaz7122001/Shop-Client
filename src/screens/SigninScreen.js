@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { Helmet } from "react-helmet-async";
 import { Store } from "../Store";
 import { toast } from "react-toastify";
@@ -45,39 +43,58 @@ const SigninScreen = () => {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <Container>
-      <div className="small-container">
-        <Helmet>
-          <title>Sign In</title>
-        </Helmet>
-        <h1 className="my-3">Sign In</h1>
-        <Form onSubmit={submitHandler}>
-          <Form.Group className="mb-3" controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <div className="mb-3">
-            <Button type="submit">Sign In</Button>
-          </div>
-          <div className="mb-3">
-            New customer?{" "}
-            <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
-          </div>
-        </Form>
+    <div>
+      <div className="login">
+        <div className="login_container">
+          <Helmet>
+            <title>Sign In</title>
+          </Helmet>
+          <h1 className="text-center">Sign In</h1>
+          <form onSubmit={submitHandler}>
+            <Form.Group className="mb-3" controlId="email">
+              <h5>Email</h5>
+              <input
+                className="login_input"
+                type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="password">
+              <h5>Password</h5>
+              <input
+                className="login_input"
+                type="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <div className="mb-3">
+              <button type="submit" className="login_signIn">
+                Sign in
+              </button>
+            </div>
+            <p>
+              By signing-in you Agree to Our Condition of Use & Sale. Please See
+              our Privacy Notice, our Cookies and our Interest-Based Ads Notice.{" "}
+            </p>
+            <div className="login_register_button">
+              New customer?{" "}
+              <Link
+                style={{ textDecoration: "none" }}
+                to={`/signup?redirect=${redirect}`}
+              >
+                Create your account
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
-    </Container>
+    </div>
   );
 };
 

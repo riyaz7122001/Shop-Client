@@ -15,9 +15,9 @@ import { Store } from "./Store";
 import { useContext } from "react";
 import SearchBox from "./components/SearchBox";
 import SigninScreen from "./screens/SigninScreen";
-import ShippingAddressScreen from "./components/ShippingAddressScreen";
+import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SignupScreen from "./screens/SignupScreen";
-import PaymentScreen from "./screens/PyamentScreen";
+import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import OrderHistoryScreen from "./screens/OrderHistoryScreen";
@@ -30,6 +30,10 @@ import SearchScreen from "./screens/SearchScreen";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 import DashboardScreen from "./screens/DashboardScreen";
+import CashOnDelivery from "./screens/CashOnDelivery";
+import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
+import { FaUserAlt } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -79,14 +83,14 @@ function App() {
                 <i className="fas fa-bars"></i>
               </Button>
               <LinkContainer to="/">
-                <Navbar.Brand>Shop</Navbar.Brand>
+                <Navbar.Brand>Shopsy</Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <SearchBox />
                 <Nav className="me-auto w-100 justify-content-end">
                   <Link to="/cart" className="nav-link">
-                    Cart
+                    <ShoppingBasket />
                     {cart.cartItems.length > 0 && (
                       <Badge pill bg="danger">
                         {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
@@ -96,7 +100,9 @@ function App() {
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
                       <LinkContainer to="/profile">
-                        <NavDropdown.Item>User Profile</NavDropdown.Item>
+                        <NavDropdown.Item>
+                          <p>User Profile</p>
+                        </NavDropdown.Item>
                       </LinkContainer>
                       <LinkContainer to="/orderhistory">
                         <NavDropdown.Item>Order History</NavDropdown.Item>
@@ -107,12 +113,15 @@ function App() {
                         to="#signout"
                         onClick={signoutHandler}
                       >
-                        Sign Out
+                        <p>
+                          Signout
+                          <FaSignOutAlt />
+                        </p>
                       </Link>
                     </NavDropdown>
                   ) : (
                     <Link className="nav-link" to="/signin">
-                      Sign In
+                      <FaUserAlt />
                     </Link>
                   )}
                   {userInfo && userInfo.isAdmin && (
@@ -163,6 +172,7 @@ function App() {
           <Container>
             <Routes>
               <Route path="/" element={<HomeScreen />} />
+              <Route path="/cash" element={<CashOnDelivery />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />

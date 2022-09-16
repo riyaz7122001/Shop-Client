@@ -7,6 +7,7 @@ import Product from "../components/Product";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import Carousel from "./Carousel";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -46,8 +47,8 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <div>
-      {/* this is used for title  */}
+    <div className="container-fluid">
+      <Carousel />
       <Helmet>
         <title>Shop</title>
       </Helmet>

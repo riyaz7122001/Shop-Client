@@ -4,13 +4,12 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { Store } from "../Store";
-import Checkout from "./Checkout";
+import Checkout from "../components/Checkout";
 
 const ShippingAddressScreen = () => {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
-    fullBox,
     userInfo,
     cart: { shippingAddress },
   } = state;
