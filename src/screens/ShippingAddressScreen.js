@@ -27,7 +27,7 @@ const ShippingAddressScreen = () => {
     }
   }, [userInfo, navigate]);
 
-  const submitHandler = (e) => {
+  const makeShipping = (e) => {
     e.preventDefault();
     ctxDispatch({
       type: "SAVE_SHIPPING_ADDRESS",
@@ -64,7 +64,7 @@ const ShippingAddressScreen = () => {
       <div className="login">
         <div className="login_container">
           <h3 className="text-center">Shipping Address</h3>
-          <Form onSubmit={submitHandler}>
+          <Form onSubmit={makeShipping}>
             <Form.Group className="mb-3" controlId="fullName">
               <h6>Full Name</h6>
               <input
