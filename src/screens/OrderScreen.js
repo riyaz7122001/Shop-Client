@@ -224,13 +224,13 @@ const OrderScreen = () => {
                     </a>
                   )}
               </Card.Text>
-              {order.isDelivered ? (
+              {/* {order.isDelivered ? (
                 <MessageBox variant="success">
                   Delivered at {order.deliveredAt}
                 </MessageBox>
               ) : (
                 <MessageBox variant="danger">Not Delivered</MessageBox>
-              )}
+              )} */}
             </Card.Body>
           </Card>
           <Card className="mb-3">
@@ -239,13 +239,13 @@ const OrderScreen = () => {
               <Card.Text>
                 <strong>Method:</strong> {order.paymentMethod}
               </Card.Text>
-              {order.isPaid ? (
+              {/* {order.isPaid ? (
                 <MessageBox variant="success">
                   Paid at {order.paidAt}
                 </MessageBox>
               ) : (
                 <MessageBox variant="danger">Not Paid</MessageBox>
-              )}
+              )} */}
             </Card.Body>
           </Card>
 
@@ -262,7 +262,12 @@ const OrderScreen = () => {
                           alt={item.name}
                           className="img-fluid rounded img-thumbnail"
                         ></img>{" "}
-                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                        <Link
+                          style={{ textDecoration: "none" }}
+                          to={`/product/${item.slug}`}
+                        >
+                          {item.name}
+                        </Link>
                       </Col>
                       <Col md={3}>
                         <span>{item.quantity}</span>

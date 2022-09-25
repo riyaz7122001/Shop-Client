@@ -30,26 +30,98 @@ function Product(props) {
 
   return (
     <Card>
-      <Link to={`/product/${product.slug}`}>
-        <img src={product.image} className="card-img-top" alt={product.name} />
+      <Link style={{ textDecoration: "none" }} to={`/product/${product.slug}`}>
+        <img
+          style={{ textDecoration: "none" }}
+          src={product.image}
+          className="card-img-top images-home"
+          alt={product.name}
+        />
       </Link>
       <Card.Body>
-        <Link to={`/product/${product.slug}`}>
-          <Card.Title>{product.name}</Card.Title>
+        <Link
+          style={{ textDecoration: "none" }}
+          to={`/product/${product.slug}`}
+        >
+          <Card.Title style={{ textDecoration: "none" }}>
+            {product.name}
+          </Card.Title>
         </Link>
-        <Rating rating={product.rating} numReviews={product.numReviews} />
+        <Rating
+          style={{ textDecoration: "none" }}
+          rating={product.rating}
+          numReviews={product.numReviews}
+        />
         <Card.Text>${product.price}</Card.Text>
         {product.countInStock === 0 ? (
           <Button variant="light" disabled>
             Out of stock
           </Button>
         ) : (
-          <Button variant="info" onClick={() => addToCartHandler(product)}>
+          <button
+            className="login_register_button"
+            style={{
+              textDecoration: "none",
+              width: "auto",
+              fontSize: "1.3rem",
+            }}
+            variant="info"
+            onClick={() => addToCartHandler(product)}
+          >
             Add to cart
-          </Button>
+          </button>
         )}
       </Card.Body>
     </Card>
   );
+  // return (
+  //   <div className="product">
+  //     <div className="product_info">
+  //       <Card.Body>
+  //         <Link to={`/product/${product.slug}`}>
+  //           <img
+  //             style={{ textDecoration: "none", width: "400px" }}
+  //             src={product.image}
+  //             className="card-img-top"
+  //             alt={product.name}
+  //           />
+  //         </Link>
+  //         <div className="product_rating">
+  //           <div style={{ textDecoration: "none" }}>
+  //             <span>{product.rating}</span>
+  //             <span>{product.numReviews}</span>
+  //           </div>
+            
+  //         </div>
+  //       </Card.Body>
+  //     </div>
+  //   </div>
+  // );
 }
 export default Product;
+// {
+//   /* <div className="product">
+//   <div className="product_info">
+//     <p>{title}</p>
+//     <p className="product_price">
+//       <small>{dollar}</small>&nbsp;
+//       <strong>{price}</strong>
+//     </p>
+//     <div className="product_rating">
+//       {Array(rating)
+//         .fill()
+//         .map((_, i) => (
+//           <p>🌟</p>
+//         ))}
+//     </div>
+//   </div>
+
+//   <div className="product_image">
+//     <img src={image} alt="" />
+
+//     <button onClick={addToBasket}>Add to Basket</button>
+//   </div>
+// </div>;
+//    */
+// }
+  

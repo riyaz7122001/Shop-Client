@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Checkout from "../components/Checkout";
 import { useNavigate } from "react-router-dom";
 import { Store } from "../Store";
-import Container from "react-bootstrap/esm/Container";
 
 const PaymentScreen = () => {
   const navigate = useNavigate();
@@ -34,7 +32,7 @@ const PaymentScreen = () => {
     navigate("/placeorder");
   };
   return (
-    <Container>
+    <div style={{ justifyContent: "center", alignItems: "center" }}>
       <Checkout step1 step2 step3></Checkout>
       <div className="container small-container">
         <Helmet>Payment Gateway</Helmet>
@@ -61,13 +59,18 @@ const PaymentScreen = () => {
             />
           </div>
           <div className="mb-3">
-            <Button variant="info" type="submit">
+            <button
+              className="login_register_button"
+              style={{ textDecoration: "none" }}
+              variant="info"
+              type="submit"
+            >
               Continue
-            </Button>
+            </button>
           </div>
         </Form>
       </div>
-    </Container>
+    </div>
   );
 };
 

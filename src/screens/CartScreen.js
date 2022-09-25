@@ -113,14 +113,16 @@ export default function CartScreen() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <div className="d-grid">
-                    <Button
+                    <button
+                      className="login_register_button"
+                      style={{ textDecoration: "none" }}
                       type="button"
                       variant="info"
                       onClick={checkoutHandler}
                       disabled={cartItems.length === 0}
                     >
                       Proceed to Checkout
-                    </Button>
+                    </button>
                   </div>
                 </ListGroup.Item>
               </ListGroup>

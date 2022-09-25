@@ -6,7 +6,6 @@ import Col from "react-bootstrap/Col";
 import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import Rating from "../components/Rating";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
@@ -100,7 +99,7 @@ const ProductScreen = () => {
                 numReviews={product.numReviews}
               ></Rating>
             </ListGroup.Item>
-            <ListGroup.Item>Pirce : ${product.price}</ListGroup.Item>
+            <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
             <ListGroup.Item>
               Description:
               <p>{product.description}</p>
@@ -133,9 +132,14 @@ const ProductScreen = () => {
                 {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <div className="d-grid">
-                      <Button onClick={addToCartHandler} variant="warning">
+                      <button
+                        className="login_register_button"
+                        style={{ textDecoration: "none" }}
+                        onClick={addToCartHandler}
+                        variant="info"
+                      >
                         Add to Cart
-                      </Button>
+                      </button>
                     </div>
                   </ListGroup.Item>
                 )}

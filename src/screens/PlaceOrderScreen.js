@@ -103,7 +103,9 @@ const PlaceOrderScreen = () => {
                 {cart.shippingAddress.country}
               </Card.Text>
               {/* here if user wants to edit something they can revert back.. */}
-              <Link to="/shipping">Edit</Link>
+              <Link style={{ textDecoration: "none" }} to="/shipping">
+                Edit
+              </Link>
             </Card.Body>
           </Card>
 
@@ -113,7 +115,9 @@ const PlaceOrderScreen = () => {
               <Card.Text>
                 <strong>Method:</strong> {cart.paymentMethod}
               </Card.Text>
-              <Link to="/payment">Edit</Link>
+              <Link style={{ textDecoration: "none" }} to="/payment">
+                Edit
+              </Link>
             </Card.Body>
           </Card>
 
@@ -140,7 +144,9 @@ const PlaceOrderScreen = () => {
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-              <Link to="/cart">Edit</Link>
+              <Link style={{ textDecoration: "none" }} to="/cart">
+                Edit
+              </Link>
             </Card.Body>
           </Card>
         </Col>

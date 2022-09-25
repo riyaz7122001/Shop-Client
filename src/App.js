@@ -217,7 +217,9 @@ function App() {
           </Container>
         </main>
         <footer>
-          <div className="text-center">All rights reserved @2022</div>
+          <div className="bg-color-black text-center">
+            All rights reserved @2022
+          </div>
         </footer>
       </div>
     </BrowserRouter>
