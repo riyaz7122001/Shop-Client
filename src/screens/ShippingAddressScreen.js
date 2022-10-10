@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { Store } from "../Store";
 import Checkout from "../components/Checkout";
+import { toast } from "react-toastify";
 
 const ShippingAddressScreen = () => {
   const navigate = useNavigate();
@@ -29,6 +30,110 @@ const ShippingAddressScreen = () => {
 
   const makeShipping = (e) => {
     e.preventDefault();
+    var regex = /^[A-Za-z]+$/;
+    if (
+      fullName === "" ||
+      address === "" ||
+      city === "" ||
+      postalCode === "" ||
+      country === ""
+    ) {
+      toast.error("Please Enter All the details properly", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (fullName.length < 3) {
+      toast.warn("Please Enter the FullName of length greater than 3", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (fullName.length > 20) {
+      toast.warn("Please Enter the FullName of length less than 20", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (!fullName.match(regex)) {
+      toast.warn("Please Enter Alphabets only in fullname", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (address.length < 3) {
+      toast.warn("Please Enter the Address of length greater than 3", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (address.length > 500) {
+      toast.warn("Please Enter the Address of length less than 20", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (city.length < 3) {
+      toast.warn("Please Enter the City of length greater than 3", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (city.length > 20) {
+      toast.warn("Please Enter the City of length less than 20", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (!city.match(regex)) {
+      toast.warn("Please Enter Alphabets only in city", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (postalCode.length < 6) {
+      toast.warn("Please Enter the PostalCode of length 6", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (country.length < 3) {
+      toast.warn("Please Enter the Country of length greater than 3", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (country.length > 20) {
+      toast.warn("Please Enter the Country of length less than 20", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (!country.match(regex)) {
+      toast.warn("Please Enter Alphabets onl in country", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
     ctxDispatch({
       type: "SAVE_SHIPPING_ADDRESS",
       payload: {

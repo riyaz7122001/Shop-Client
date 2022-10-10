@@ -74,54 +74,7 @@ function Product(props) {
       </Card.Body>
     </Card>
   );
-  // return (
-  //   <div className="product">
-  //     <div className="product_info">
-  //       <Card.Body>
-  //         <Link to={`/product/${product.slug}`}>
-  //           <img
-  //             style={{ textDecoration: "none", width: "400px" }}
-  //             src={product.image}
-  //             className="card-img-top"
-  //             alt={product.name}
-  //           />
-  //         </Link>
-  //         <div className="product_rating">
-  //           <div style={{ textDecoration: "none" }}>
-  //             <span>{product.rating}</span>
-  //             <span>{product.numReviews}</span>
-  //           </div>
-            
-  //         </div>
-  //       </Card.Body>
-  //     </div>
-  //   </div>
-  // );
+
+
 }
 export default Product;
-// {
-//   /* <div className="product">
-//   <div className="product_info">
-//     <p>{title}</p>
-//     <p className="product_price">
-//       <small>{dollar}</small>&nbsp;
-//       <strong>{price}</strong>
-//     </p>
-//     <div className="product_rating">
-//       {Array(rating)
-//         .fill()
-//         .map((_, i) => (
-//           <p>🌟</p>
-//         ))}
-//     </div>
-//   </div>
-
-//   <div className="product_image">
-//     <img src={image} alt="" />
-
-//     <button onClick={addToBasket}>Add to Basket</button>
-//   </div>
-// </div>;
-//    */
-// }
-  

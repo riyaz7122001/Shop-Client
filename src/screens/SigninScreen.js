@@ -21,6 +21,48 @@ const SigninScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    if (email === "" || password === "") {
+      toast.warn("Please fill all the details", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (email.length < 3) {
+      toast.warn("Please Enter the Email of length greater than 3", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (email.length > 20) {
+      toast.warn("Please Enter the Email of length less than 20", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (email.indexOf("@") <= 0) {
+      toast.warn("Please Enter Correct Email only", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (
+      email.charAt(email.length - 4) !== "." &&
+      email.charAt(email.length - 3) !== "."
+    ) {
+      toast.warn("Invalid . position", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
     try {
       const { data } = await axios.post("/api/users/signin", {
         email,
@@ -60,6 +102,7 @@ const SigninScreen = () => {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="password">
@@ -71,6 +114,7 @@ const SigninScreen = () => {
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
+                required
               />
             </Form.Group>
             <div className="mb-3">

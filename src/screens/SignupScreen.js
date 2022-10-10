@@ -32,6 +32,84 @@ const SignupScreen = () => {
       toast.error("Please Enter all the details properly...");
       return;
     }
+    if (
+      name === "" ||
+      email === "" ||
+      password === "" ||
+      confirmPassword === ""
+    ) {
+      toast.warn("Please fill all the details", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (name.length < 3) {
+      toast.warn("Please Enter the Name of length greater than 3", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (name.length > 20) {
+      toast.warn("Please Enter the Name of length less than 20", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    var regex = /^[A-Za-z]+$/;
+    if (!name.match(regex)) {
+      toast.warn("Please Enter Alphabets only", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (email.indexOf("@") <= 0) {
+      toast.warn("Please Enter Correct Email only", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (
+      email.charAt(email.length - 4) !== "." &&
+      email.charAt(email.length - 3) !== "."
+    ) {
+      toast.warn("Invalid . position", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (email.length < 3) {
+      toast.warn("Please Enter the Email of length greater than 3", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (password.length < 3) {
+      toast.warn("Please Enter the Password of length greater than 3", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (password.length > 20) {
+      toast.warn("Please Enter the Password of length less than 20", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+      return;
+    }
     try {
       const { data } = await axios.post("/api/users/signup", {
         name,
@@ -69,6 +147,7 @@ const SignupScreen = () => {
               onChange={(e) => {
                 setName(e.target.value);
               }}
+              required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="email">
@@ -80,6 +159,7 @@ const SignupScreen = () => {
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
+              required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="password">
@@ -91,6 +171,7 @@ const SignupScreen = () => {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
+              required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="confirmPassword">
@@ -102,6 +183,7 @@ const SignupScreen = () => {
               onChange={(e) => {
                 setConfirmPassword(e.target.value);
               }}
+              required
             />
           </Form.Group>
 
